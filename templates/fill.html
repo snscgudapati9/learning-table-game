@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fill in the Blank</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Fill in the Blank!</h1>
+
+    <div class="modes">
+        <button onclick="location.href='/'">Learn Tables</button>
+        <button onclick="location.href='/choose'">Choose Correct</button>
+        <button onclick="location.href='/fill'">Fill in the Blanks</button>
+    </div>
+
+    <div id="question"></div>
+    <input type="number" id="answerInput" placeholder="Enter your answer">
+    <button onclick="submitAnswer()">Submit</button>
+    <div id="feedback"></div>
+
+    <script>
+        let correctAnswer = 0;
+
+        function generateBlank() {
+            const num = Math.floor(Math.random() * 20) + 1;
+            const multiplier = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num * multiplier;
+
+            document.getElementById('question').innerHTML = `What is ${num} x ${multiplier}?`;
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('answerInput').value = '';
+        }
+
+        function submitAnswer() {
+            const userAnswer = parseInt(document.getElementById('answerInput').value);
+            if (userAnswer === correctAnswer) {
+                document.getElementById('feedback').innerHTML = "✅ Correct!";
+            } else {
+                document.getElementById('feedback').innerHTML = `❌ Wrong. Correct answer is ${correctAnswer}`;
+            }
+            setTimeout(generateBlank, 2000);
+        }
+
+        generateBlank();
+    </script>
+</body>
+</html>

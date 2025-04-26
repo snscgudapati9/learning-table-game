@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Correct Answer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Choose the Correct Answer!</h1>
+
+    <h1>Welcome, {{ username }}!</h1>
+
+    <div class="progress-container">
+        <div class="progress-bar">{{ progress }}%</div>
+    </div>
+    
+    <div class="modes">
+        <button onclick="location.href='/'">Learn Tables</button>
+        <button onclick="location.href='/choose'">Choose Correct</button>
+        <button onclick="location.href='/fill'">Fill in the Blanks</button>
+    </div>
+
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="feedback"></div>
+
+    <script>
+        function generateQuestion() {
+            const num = Math.floor(Math.random() * 20) + 1;
+            const multiplier = Math.floor(Math.random() * 10) + 1;
+            const correctAnswer = num * multiplier;
+
+            document.getElementById('question').innerHTML = `What is ${num} x ${multiplier}?`;
+
+            let options = [];
+            options.push(correctAnswer);
+            while (options.length < 4) {
+                let wrong = Math.floor(Math.random() * 200) + 1;
+                if (!options.includes(wrong)) {
+                    options.push(wrong);
+                }
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            let buttons = '';
+            for (let opt of options) {
+                buttons += `<button onclick="checkAnswer(${opt}, ${correctAnswer})">${opt}</button><br><br>`;
+            }
+            document.getElementById('options').innerHTML = buttons;
+        }
+
+        function checkAnswer(selected, correct) {
+            if (selected === correct) {
+                document.getElementById('feedback').innerHTML = "✅ Correct! Good job!";
+            } else {
+                document.getElementById('feedback').innerHTML = "❌ Wrong. Try Again!";
+            }
+            setTimeout(generateQuestion, 1500);
+        }
+
+        generateQuestion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to right, #f9f3f3, #e0f7fa);
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    color: #333;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.modes {
+    margin-bottom: 30px;
+}
+
+.modes button {
+    margin: 5px;
+    padding: 12px 22px;
+    font-size: 18px;
+    border-radius: 15px;
+    border: none;
+    background-color: #ff9800;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modes button:hover {
+    background-color: #fb8c00;
+    transform: scale(1.05);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.buttons button {
+    padding: 20px;
+    font-size: 22px;
+    border-radius: 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #43A047;
+    transform: translateY(-5px);
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #555;
+}
+
+#question, #options, #feedback {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+input[type="number"] {
+    padding: 12px;
+    font-size: 20px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    width: 80%;
+}
+
+button {
+    outline: none;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .buttons button, .modes button {
+        padding: 15px;
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    #question, #options, #feedback {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons button, .modes button {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+/* Progress Bar Styling */
+.progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 25px;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 30px;
+    width: 0;
+    background-color: #4caf50;
+    border-radius: 25px;
+}
+
+.modes {
+    margin-top: 20px;
+}
+
+.modes button {
+    margin: 5px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+#result {
+    margin-top: 20px;
+}
+

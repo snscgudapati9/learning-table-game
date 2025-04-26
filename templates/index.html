@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Tables Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to the Learning Tables Game mama!</h1>
+
+    <h1>Welcome, {{ username }}!</h1>
+
+    <!-- Global Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" style="width: {{ global_progress }}%;"></div>
+    </div>
+
+    <div class="modes">
+        <a href="{{ url_for('index') }}"><button>Learn Tables</button></a>
+        <a href="{{ url_for('login_signup', next='choose') }}"><button>Choose Correct</button></a>
+        <a href="{{ url_for('login_signup', next='fill') }}"><button>Fill in the Blanks</button></a>
+    </div>
+
+    <h3>Select a table to learn:</h3>
+    <div class="buttons">
+        {% for i in range(1, 21) %}
+            <button onclick="fetchTable({{ i }})">{{ i }}</button>
+        {% endfor %}
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+        function fetchTable(number) {
+            fetch('/get_table', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'number=' + number
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '<h3>Multiplication Table of ' + number + ':</h3><ul>';
+                data.table.forEach(row => {
+                    resultDiv.innerHTML += '<li>' + row + '</li>';
+                });
+                resultDiv.innerHTML += '</ul>';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
