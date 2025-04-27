@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to the Learning Tables Game mama!</h1>
+    <h1>Welcome to the Learning Tables Game, mama!</h1>
 
     <h1>Welcome, {{ username }}!</h1>
 
@@ -18,43 +18,79 @@
 
     <div class="modes">
         <a href="{{ url_for('index') }}"><button>Learn Tables</button></a>
-        <a href="{{ url_for('login_signup', next='choose') }}"><button>Choose Correct</button></a>
-        <a href="{{ url_for('login_signup', next='fill') }}"><button>Fill in the Blanks</button></a>
+        <a href="{{ url_for('choose') }}"><button>Choose Correct</button></a>
+        <a href="{{ url_for('fill') }}"><button>Fill in the Blanks</button></a>
     </div>
 
     <h3>Select a table to learn:</h3>
-    <div class="buttons">
+    <div class="table-buttons">
         {% for i in range(1, 21) %}
             <button onclick="fetchTable({{ i }})">{{ i }}</button>
         {% endfor %}
     </div>
 
-    <div id="result"></div>
+    <div id="table-result"></div> <!-- changed id -->
 
-    <script>
-        function fetchTable(number) {
-            fetch('/get_table', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'number=' + number
-            })
-            .then(response => response.json())
-            .then(data => {
-                const resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = '<h3>Multiplication Table of ' + number + ':</h3><ul>';
-                data.table.forEach(row => {
-                    resultDiv.innerHTML += '<li>' + row + '</li>';
-                });
-                resultDiv.innerHTML += '</ul>';
-            })
-            .catch(error => {
-                console.error('Error:', error);
+    <div class="calculator">
+        <h2>Calculator</h2>
+        <input type="number" id="num1" placeholder="First Number">
+        <input type="number" id="num2" placeholder="Second Number">
+      
+        <div class="calculator-buttons">
+          <button onclick="calculate('*')">×</button>
+          <button onclick="calculate('+')">+</button>
+          <button onclick="calculate('-')">-</button>
+          <button onclick="calculate('/')">÷</button>
+        </div>
+      
+        <div class="result" id="calculator-result">Result: 0</div> <!-- changed id -->
+    </div>
+
+<script>
+    function fetchTable(number) {
+        fetch('/get_table', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'number=' + number
+        })
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById('table-result'); // changed
+            resultDiv.innerHTML = '<h3>Multiplication Table of ' + number + ':</h3><ul>';
+            data.table.forEach(row => {
+                resultDiv.innerHTML += '<li>' + row + '</li>';
             });
-        }
-    </script>
+            resultDiv.innerHTML += '</ul>';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    function calculate(operation) {
+        var num1 = parseFloat(document.getElementById('num1').value) || 0;
+        var num2 = parseFloat(document.getElementById('num2').value) || 0;
+        var result = 0;
+      
+        if (operation === '*') {
+            result = num1 * num2;
+        } else if (operation === '+') {
+            result = num1 + num2;
+        } else if (operation === '-') {
+            result = num1 - num2;
+        } else if (operation === '/') {
+            if (num2 === 0) {
+                result = 'Cannot divide by 0';
+            } else {
+                result = num1 / num2;
+            }
+        }
+      
+        document.getElementById('calculator-result').innerText = 'Result: ' + result; // changed
+    }
+</script>
+
 </body>
 </html>
