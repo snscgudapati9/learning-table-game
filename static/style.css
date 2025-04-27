@@ -1,19 +1,26 @@
+/* General Page Styling */
 body {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     background: linear-gradient(to right, #f9f3f3, #e0f7fa);
     text-align: center;
     padding: 20px;
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Headings */
 h1 {
     color: #333;
     font-size: 36px;
     margin-bottom: 20px;
 }
 
+/* Modes Buttons Section */
 .modes {
-    margin-bottom: 30px;
+    margin: 20px 0;
 }
 
 .modes button {
@@ -33,7 +40,8 @@ h1 {
     transform: scale(1.05);
 }
 
-.buttons {
+/* Table Buttons */
+.table-buttons {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
@@ -41,7 +49,7 @@ h1 {
     padding: 0 10px;
 }
 
-.buttons button {
+.table-buttons button {
     padding: 20px;
     font-size: 22px;
     border-radius: 20px;
@@ -52,73 +60,68 @@ h1 {
     transition: transform 0.3s, background 0.3s;
 }
 
-.buttons button:hover {
+.table-buttons button:hover {
     background-color: #43A047;
     transform: translateY(-5px);
 }
 
+/* Result Section */
 #result {
     margin-top: 20px;
     font-size: 24px;
     color: #555;
 }
 
-#question, #options, #feedback {
-    margin-top: 20px;
-    font-size: 24px;
+/* Calculator Section */
+.calculator {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    text-align: center;
+    margin-top: 40px;
+    width: 300px;
 }
 
-input[type="number"] {
-    padding: 12px;
-    font-size: 20px;
-    border-radius: 12px;
+.calculator input[type="number"] {
+    width: 120px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 18px;
     border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Calculator Buttons */
+.calculator-buttons {
     margin-top: 10px;
-    width: 80%;
 }
 
-button {
-    outline: none;
+.calculator-buttons button {
+    width: 60px;
+    height: 40px;
+    margin: 5px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background 0.3s;
 }
 
-/* Responsive design */
-@media (max-width: 1024px) {
-    .buttons {
-        grid-template-columns: repeat(4, 1fr);
-    }
+.calculator-buttons button:hover {
+    background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
-    .buttons {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .buttons button, .modes button {
-        padding: 15px;
-        font-size: 20px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    #question, #options, #feedback {
-        font-size: 20px;
-    }
+/* Calculator Result */
+.result {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-@media (max-width: 480px) {
-    .buttons {
-        grid-template-columns: 1fr;
-    }
-
-    .buttons button, .modes button {
-        width: 80%;
-        margin: auto;
-    }
-}
-
-/* Progress Bar Styling */
+/* Progress Bar */
 .progress-container {
     width: 100%;
     background-color: #f3f3f3;
@@ -133,25 +136,35 @@ button {
     border-radius: 25px;
 }
 
-.modes {
-    margin-top: 20px;
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .table-buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
-.modes button {
-    margin: 5px;
+@media (max-width: 768px) {
+    .table-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-buttons button, .modes button {
+        padding: 15px;
+        font-size: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
 }
 
-.buttons {
-    margin-top: 20px;
-}
+@media (max-width: 480px) {
+    .table-buttons {
+        grid-template-columns: 1fr;
+    }
 
-.buttons button {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
+    .table-buttons button, .modes button {
+        width: 80%;
+        margin: auto;
+    }
 }
-
-#result {
-    margin-top: 20px;
-}
-
