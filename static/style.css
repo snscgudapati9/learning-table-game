@@ -1,4 +1,4 @@
-/* General Page Styling */
+/* Global Styles */
 body {
     font-family: 'Comic Sans MS', cursive, sans-serif;
     background: linear-gradient(to right, #f9f3f3, #e0f7fa);
@@ -9,6 +9,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade-in effect for the body */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Headings */
@@ -18,26 +29,192 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Modes Buttons Section */
-.modes {
-    margin: 20px 0;
+/* Authentication Box Styling */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
-.modes button {
-    margin: 5px;
-    padding: 12px 22px;
+.auth-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    transform: translateY(-30px);
+    animation: slideIn 0.8s ease-out forwards;
+}
+
+/* Slide-in effect for auth box */
+@keyframes slideIn {
+    0% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Animations for headings */
+h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+    animation: bounceIn 1s ease-in-out;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translateY(-20px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+h3 {
     font-size: 18px;
-    border-radius: 15px;
-    border: none;
-    background-color: #ff9800;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
+    color: #777;
+    margin-bottom: 20px;
+    animation: fadeInText 1.5s ease-in-out;
 }
 
-.modes button:hover {
-    background-color: #fb8c00;
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Input Group Styling */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #4a90e2;
+    outline: none;
     transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.5);
+}
+
+/* Error Message Styling */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    animation: fadeInError 0.8s ease-in-out;
+}
+
+@keyframes fadeInError {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Buttons Styling */
+.auth-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.auth-buttons button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, background 0.3s;
+    width: 48%;
+}
+
+.btn-login {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-login:hover {
+    background-color: #45a049;
+    transform: translateY(-5px);
+}
+
+.btn-signup {
+    background-color: #f9a825;
+    color: white;
+}
+
+.btn-signup:hover {
+    background-color: #f8a017;
+    transform: translateY(-5px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .table-buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-box {
+        padding: 25px;
+    }
+
+    .auth-buttons button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .table-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .table-buttons button, .modes button {
+        width: 80%;
+        margin: auto;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
 }
 
 /* Table Buttons */
@@ -65,11 +242,17 @@ h1 {
     transform: translateY(-5px);
 }
 
-/* Result Section */
-#result {
-    margin-top: 20px;
-    font-size: 24px;
-    color: #555;
+/* General Page Styling */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to right, #f9f3f3, #e0f7fa);
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Calculator Section */
@@ -77,7 +260,7 @@ h1 {
     background: #fff;
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     margin-top: 40px;
     width: 300px;
@@ -123,48 +306,19 @@ h1 {
 
 /* Progress Bar */
 .progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 25px;
-    margin: 20px 0;
+    width: 80%;
+    height: 25px;
+    background: white;
+    border: 3px solid #333;
+    border-radius: 5px;
+    margin: 20px auto;
+    box-shadow: 0 0 0 2px #333;
+    position: relative;
 }
 
 .progress-bar {
-    height: 30px;
-    width: 0;
-    background-color: #4caf50;
-    border-radius: 25px;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .table-buttons {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .table-buttons {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .table-buttons button, .modes button {
-        padding: 15px;
-        font-size: 20px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-}
-
-@media (max-width: 480px) {
-    .table-buttons {
-        grid-template-columns: 1fr;
-    }
-
-    .table-buttons button, .modes button {
-        width: 80%;
-        margin: auto;
-    }
+    height: 100%;
+    background: #4caf50;
+    width: 60%; /* example value, can be dynamic */
+    border-right: 3px solid #333;
 }
