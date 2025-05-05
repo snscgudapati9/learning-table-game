@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to the Learning Tables Game, mama!</h1>
+    <h1>Welcome to the Learn Mathematics Game, mama!</h1>
 
     <h1>Welcome, {{ username }}!</h1>
 
@@ -44,6 +44,40 @@
         </div>
       
         <div class="result" id="calculator-result">Result: 0</div> <!-- changed id -->
+
+        <h3>Profit / Loss Calculator</h3>
+        <input type="number" id="costPrice" placeholder="Cost Price">
+        <input type="number" id="sellingPrice" placeholder="Selling Price">
+        <button onclick="calcProfitLoss()">Check</button>
+        <div class="result" id="profitLossResult"></div>
+
+        <h3>Simple Interest Calculator</h3>
+        <input type="number" id="principal" placeholder="Principal">
+        <input type="number" id="rate" placeholder="Rate (%)">
+        <input type="number" id="time" placeholder="Time (in years)">
+        <button onclick="calcSimpleInterest()">Calculate</button>
+        <div class="result" id="siResult"></div>
+
+        <h3>Compound Interest Calculator</h3>
+        <input type="number" id="cPrincipal" placeholder="Principal">
+        <input type="number" id="cRate" placeholder="Rate (%)">
+        <input type="number" id="cTime" placeholder="Time (in years)">
+        <input type="number" id="cFrequency" placeholder="Compounded Times/Year">
+        <button onclick="calcCompoundInterest()">Calculate</button>
+        <div class="result" id="ciResult"></div>
+
+        <h3>EMI Calculator</h3>
+        <input type="number" id="loanAmount" placeholder="Loan Amount">
+        <input type="number" id="emiRate" placeholder="Interest Rate (Annual %)">
+        <input type="number" id="loanTenure" placeholder="Tenure (in months)">
+        <button onclick="calcEMI()">Calculate EMI</button>
+        <div class="result" id="emiResult"></div>
+
+        <h3>ROI (Return on Investment)</h3>
+        <input type="number" id="investmentAmount" placeholder="Investment Amount">
+        <input type="number" id="returnAmount" placeholder="Return Amount">
+        <button onclick="calcROI()">Calculate ROI</button>
+        <div class="result" id="roiResult"></div>
     </div>
 
 <script>
@@ -89,6 +123,65 @@
         }
       
         document.getElementById('calculator-result').innerText = 'Result: ' + result; // changed
+    }
+    function calcProfitLoss() {
+        const cp = parseFloat(document.getElementById('costPrice').value) || 0;
+        const sp = parseFloat(document.getElementById('sellingPrice').value) || 0;
+        let result = '';
+
+        if (sp > cp) {
+            result = `Profit: ₹${(sp - cp).toFixed(2)}`;
+        } else if (cp > sp) {
+            result = `Loss: ₹${(cp - sp).toFixed(2)}`;
+        } else {
+            result = "No Profit No Loss";
+        }
+
+        document.getElementById('profitLossResult').innerText = result;
+    }
+
+    function calcSimpleInterest() {
+        const p = parseFloat(document.getElementById('principal').value) || 0;
+        const r = parseFloat(document.getElementById('rate').value) || 0;
+        const t = parseFloat(document.getElementById('time').value) || 0;
+        const interest = (p * r * t) / 100;
+
+        document.getElementById('siResult').innerText = `Simple Interest: ₹${interest.toFixed(2)}`;
+    }
+
+    function calcCompoundInterest() {
+        const p = parseFloat(document.getElementById('cPrincipal').value) || 0;
+        const r = parseFloat(document.getElementById('cRate').value) / 100;
+        const t = parseFloat(document.getElementById('cTime').value) || 0;
+        const n = parseFloat(document.getElementById('cFrequency').value) || 1;
+        const amount = p * Math.pow((1 + r/n), n*t);
+        const interest = amount - p;
+
+        document.getElementById('ciResult').innerText = `Compound Interest: ₹${interest.toFixed(2)} | Final Amount: ₹${amount.toFixed(2)}`;
+    }
+
+    function calcEMI() {
+        const principal = parseFloat(document.getElementById('loanAmount').value) || 0;
+        const annualRate = parseFloat(document.getElementById('emiRate').value) || 0;
+        const months = parseFloat(document.getElementById('loanTenure').value) || 1;
+
+        const monthlyRate = annualRate / (12 * 100);
+        const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                    (Math.pow(1 + monthlyRate, months) - 1);
+
+        document.getElementById('emiResult').innerText = `Monthly EMI: ₹${emi.toFixed(2)}`;
+    }
+
+    function calcROI() {
+        const investment = parseFloat(document.getElementById('investmentAmount').value) || 0;
+        const returns = parseFloat(document.getElementById('returnAmount').value) || 0;
+        if (investment === 0) {
+            document.getElementById('roiResult').innerText = "Investment cannot be zero.";
+            return;
+        }
+
+        const roi = ((returns - investment) / investment) * 100;
+        document.getElementById('roiResult').innerText = `ROI: ${roi.toFixed(2)}%`;
     }
 </script>
 
